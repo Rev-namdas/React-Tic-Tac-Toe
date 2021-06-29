@@ -4,20 +4,24 @@ import Square from './Components/Square';
 import { Patterns } from './Components/Patterns'
 
 function App() {
+  const player1 = 'X'
+  const player2 = 'O'
+
   const [board, setBoard] = useState(['', '', '', '', '', '', '', '', ''])
-  const [player, setPlayer] = useState('O')
+  const [player, setPlayer] = useState(player2)
   const [result, setResult] = useState({ winner: 'none', status: 'none' })
 
   useEffect(() => {
+    checkTie() 
     checkWin()
-    checkTie()
 
-    if (player === "X"){
-      setPlayer('O')
+    if (player === player1){
+      setPlayer(player2)
     } else {
-      setPlayer('X')
+      setPlayer(player1)
     }
   },
+  // eslint-disable-next-line
   [board])
 
   useEffect(() => {
@@ -26,6 +30,7 @@ function App() {
     }
     resetGame()
   },
+  // eslint-disable-next-line
   [result])
 
   const choosedSquare = (sqaure) => {
@@ -78,7 +83,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 style={{color: player === 'X' ? 'green' : 'red'}}>Player {player} turn</h1>
+      <h1 style={{color: player === player1 ? 'green' : 'red'}}>Player {player} turn</h1>
 
       <h1 className='board'>
         <div className="row">
